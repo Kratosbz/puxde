@@ -82,7 +82,7 @@
     img.lazy-loaded { opacity: 1; filter: blur(0); }
 
     /* ============================================================
-       BASE STYLES  (original puxde.css)
+       BASE STYLES
     ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -99,7 +99,7 @@
       --radius: 14px;
       --nav-h: 68px;
     }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; } /* FIX #1: overflow-x hidden on html prevents translateX animations from causing horizontal scroll */
     body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; height: auto; display: block; }
@@ -117,7 +117,7 @@
     .warning-banner p { font-size: 11px; color: rgba(255,200,50,0.75); line-height: 1.5; max-width: 1100px; margin: 0 auto; }
 
     /* ============================================================
-       HEADER  (new — replaces old simple header)
+       HEADER
     ============================================================ */
     .header {
       position: sticky;
@@ -181,7 +181,7 @@
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* ============================================================
-       MOBILE MENU  (matches IUX screenshot design)
+       MOBILE MENU
     ============================================================ */
     .mobile-menu {
       position: fixed; inset: 0; background: #090d11; z-index: 300;
@@ -321,7 +321,7 @@
     .disclaimer { margin-top: 50px; font-size: 0.78rem; color: var(--text-muted); max-width: 700px; margin-left: auto; margin-right: auto; }
 
     /* ============================================================
-       HOME FOOTER  (original full legal footer)
+       HOME FOOTER
     ============================================================ */
     .footer { border-top: 1px solid var(--border); padding: 60px 40px 40px; }
     .footer-top { display: grid; grid-template-columns: 200px 1fr; gap: 60px; margin-bottom: 48px; }
@@ -341,8 +341,7 @@
     .copyright { color: var(--text-muted) !important; font-size: 0.82rem !important; }
 
     /* ============================================================
-       INNER PAGE STYLES  (trade, platforms, education, company,
-                           accounts, comparison)
+       INNER PAGE STYLES
     ============================================================ */
     :root { --bg-card2: #141920; }
     .section { padding: 100px 80px; }
@@ -525,8 +524,13 @@
     @media (max-width: 900px) {
       .desktop-nav,.header-actions { display: none; }
       .hamburger { display: flex; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-image { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-bottom: 60px; }
+      /* FIX #2: Show hero image on mobile, centered below the hero text */
+      .hero-image {
+        display: block;
+        max-width: 340px;
+        margin: 8px auto 0;
+      }
       .precision,.platforms,.latency { grid-template-columns: 1fr; }
       .split { grid-template-columns: 1fr; gap: 40px; } .split.rev { direction: ltr; }
       .g2,.g3 { grid-template-columns: 1fr; }
@@ -558,6 +562,7 @@
       .team-grid { grid-template-columns: 1fr 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .hero { padding: 60px 20px; }
+      .hero-image { max-width: 280px; }
     }
   </style>
 </head>
@@ -578,49 +583,49 @@
     <div class="nav-item">
       <button class="nav-btn" onclick="toggleDropdown('dd-trade',this)">Trade <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       <div class="dropdown" id="dd-trade">
-        <a href="#" onclick="showPage('trade');closeDropdowns()">Currency CFDs</a>
-        <a href="#" onclick="showPage('trade');closeDropdowns()">Commodity CFDs</a>
-        <a href="#" onclick="showPage('trade');closeDropdowns()">Stock CFDs</a>
-        <a href="#" onclick="showPage('trade');closeDropdowns()">Index CFDs</a>
-        <a href="#" onclick="showPage('trade');closeDropdowns()">Crypto CFDs</a>
-        <a href="#" onclick="showPage('trade');closeDropdowns()">Live Quotes</a>
+        <a href="javascript:void(0)" onclick="showPage('trade');closeDropdowns()">Currency CFDs</a>
+        <a href="javascript:void(0)" onclick="showPage('trade');closeDropdowns()">Commodity CFDs</a>
+        <a href="javascript:void(0)" onclick="showPage('trade');closeDropdowns()">Stock CFDs</a>
+        <a href="javascript:void(0)" onclick="showPage('trade');closeDropdowns()">Index CFDs</a>
+        <a href="javascript:void(0)" onclick="showPage('trade');closeDropdowns()">Crypto CFDs</a>
+        <a href="javascript:void(0)" onclick="showPage('trade');closeDropdowns()">Live Quotes</a>
       </div>
     </div>
     <div class="nav-item">
       <button class="nav-btn" onclick="toggleDropdown('dd-platforms',this)">Platforms <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       <div class="dropdown" id="dd-platforms">
-        <a href="#" onclick="showPage('platforms');closeDropdowns()">Puxde Trade App</a>
-        <a href="#" onclick="showPage('platforms');closeDropdowns()">Puxde WebTerminal</a>
-        <a href="#" onclick="showPage('platforms');closeDropdowns()">MetaTrader 5</a>
+        <a href="javascript:void(0)" onclick="showPage('platforms');closeDropdowns()">Puxde Trade App</a>
+        <a href="javascript:void(0)" onclick="showPage('platforms');closeDropdowns()">Puxde WebTerminal</a>
+        <a href="javascript:void(0)" onclick="showPage('platforms');closeDropdowns()">MetaTrader 5</a>
       </div>
     </div>
     <div class="nav-item">
       <button class="nav-btn" onclick="toggleDropdown('dd-edu',this)">Education <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       <div class="dropdown" id="dd-edu">
-        <a href="#" onclick="showPage('education');closeDropdowns()">Beginner's Guide</a>
-        <a href="#" onclick="showPage('education');closeDropdowns()">Video Tutorials</a>
-        <a href="#" onclick="showPage('education');closeDropdowns()">Market Analysis</a>
-        <a href="#" onclick="showPage('education');closeDropdowns()">Trading Glossary</a>
+        <a href="javascript:void(0)" onclick="showPage('education');closeDropdowns()">Beginner's Guide</a>
+        <a href="javascript:void(0)" onclick="showPage('education');closeDropdowns()">Video Tutorials</a>
+        <a href="javascript:void(0)" onclick="showPage('education');closeDropdowns()">Market Analysis</a>
+        <a href="javascript:void(0)" onclick="showPage('education');closeDropdowns()">Trading Glossary</a>
       </div>
     </div>
     <div class="nav-item">
       <button class="nav-btn" onclick="toggleDropdown('dd-company',this)">Company <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
       <div class="dropdown" id="dd-company">
-        <a href="#" onclick="showPage('company');closeDropdowns()">About Puxde</a>
-        <a href="#" onclick="showPage('company');closeDropdowns()">Regulation</a>
-        <a href="#" onclick="showPage('company');closeDropdowns()">Our Team</a>
-        <a href="#" onclick="showPage('company');closeDropdowns()">Careers</a>
-        <a href="#" onclick="showPage('company');closeDropdowns()">Contact Us</a>
+        <a href="javascript:void(0)" onclick="showPage('company');closeDropdowns()">About Puxde</a>
+        <a href="javascript:void(0)" onclick="showPage('company');closeDropdowns()">Regulation</a>
+        <a href="javascript:void(0)" onclick="showPage('company');closeDropdowns()">Our Team</a>
+        <a href="javascript:void(0)" onclick="showPage('company');closeDropdowns()">Careers</a>
+        <a href="javascript:void(0)" onclick="showPage('company');closeDropdowns()">Contact Us</a>
       </div>
     </div>
     <button class="nav-btn" onclick="showPage('accounts')">Accounts</button>
     <button class="nav-btn" onclick="showPage('comparison')">Comparison</button>
   </nav>
   <div class="header-actions">
-    <a href="#" class="btn btn-ghost">Login</a>
-    <a href="#" class="btn btn-primary">Open Account</a>
+    <a href="javascript:void(0)" class="btn btn-ghost">Login</a>
+    <a href="javascript:void(0)" class="btn btn-primary">Open Account</a>
   </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
 </header>
 
 <!-- ===== MOBILE MENU ===== -->
@@ -635,51 +640,51 @@
   <div class="mobile-nav-item">
     <button class="mobile-nav-btn" onclick="toggleMobileSub('ms-trade',this)">Trade <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <div class="mobile-submenu" id="ms-trade">
-      <a href="#" onclick="showPage('trade');closeMobileMenu()">Currency CFDs</a>
-      <a href="#" onclick="showPage('trade');closeMobileMenu()">Commodity CFDs</a>
-      <a href="#" onclick="showPage('trade');closeMobileMenu()">Stock CFDs</a>
-      <a href="#" onclick="showPage('trade');closeMobileMenu()">Index CFDs</a>
-      <a href="#" onclick="showPage('trade');closeMobileMenu()">Crypto CFDs</a>
-      <a href="#" onclick="showPage('trade');closeMobileMenu()">Live Quotes</a>
+      <a href="javascript:void(0)" onclick="showPage('trade');closeMobileMenu()">Currency CFDs</a>
+      <a href="javascript:void(0)" onclick="showPage('trade');closeMobileMenu()">Commodity CFDs</a>
+      <a href="javascript:void(0)" onclick="showPage('trade');closeMobileMenu()">Stock CFDs</a>
+      <a href="javascript:void(0)" onclick="showPage('trade');closeMobileMenu()">Index CFDs</a>
+      <a href="javascript:void(0)" onclick="showPage('trade');closeMobileMenu()">Crypto CFDs</a>
+      <a href="javascript:void(0)" onclick="showPage('trade');closeMobileMenu()">Live Quotes</a>
     </div>
   </div>
   <div class="mobile-nav-item">
     <button class="mobile-nav-btn" onclick="toggleMobileSub('ms-plat',this)">Platforms <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <div class="mobile-submenu" id="ms-plat">
-      <a href="#" onclick="showPage('platforms');closeMobileMenu()">Puxde Trade App</a>
-      <a href="#" onclick="showPage('platforms');closeMobileMenu()">Puxde WebTerminal</a>
-      <a href="#" onclick="showPage('platforms');closeMobileMenu()">MetaTrader 5</a>
+      <a href="javascript:void(0)" onclick="showPage('platforms');closeMobileMenu()">Puxde Trade App</a>
+      <a href="javascript:void(0)" onclick="showPage('platforms');closeMobileMenu()">Puxde WebTerminal</a>
+      <a href="javascript:void(0)" onclick="showPage('platforms');closeMobileMenu()">MetaTrader 5</a>
     </div>
   </div>
   <div class="mobile-nav-item">
     <button class="mobile-nav-btn" onclick="toggleMobileSub('ms-edu',this)">Education <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <div class="mobile-submenu" id="ms-edu">
-      <a href="#" onclick="showPage('education');closeMobileMenu()">Beginner's Guide</a>
-      <a href="#" onclick="showPage('education');closeMobileMenu()">Video Tutorials</a>
-      <a href="#" onclick="showPage('education');closeMobileMenu()">Market Analysis</a>
-      <a href="#" onclick="showPage('education');closeMobileMenu()">Trading Glossary</a>
+      <a href="javascript:void(0)" onclick="showPage('education');closeMobileMenu()">Beginner's Guide</a>
+      <a href="javascript:void(0)" onclick="showPage('education');closeMobileMenu()">Video Tutorials</a>
+      <a href="javascript:void(0)" onclick="showPage('education');closeMobileMenu()">Market Analysis</a>
+      <a href="javascript:void(0)" onclick="showPage('education');closeMobileMenu()">Trading Glossary</a>
     </div>
   </div>
   <div class="mobile-nav-item">
     <button class="mobile-nav-btn" onclick="toggleMobileSub('ms-company',this)">Company <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <div class="mobile-submenu" id="ms-company">
-      <a href="#" onclick="showPage('company');closeMobileMenu()">About Puxde</a>
-      <a href="#" onclick="showPage('company');closeMobileMenu()">Regulation</a>
-      <a href="#" onclick="showPage('company');closeMobileMenu()">Our Team</a>
-      <a href="#" onclick="showPage('company');closeMobileMenu()">Careers</a>
-      <a href="#" onclick="showPage('company');closeMobileMenu()">Contact Us</a>
+      <a href="javascript:void(0)" onclick="showPage('company');closeMobileMenu()">About Puxde</a>
+      <a href="javascript:void(0)" onclick="showPage('company');closeMobileMenu()">Regulation</a>
+      <a href="javascript:void(0)" onclick="showPage('company');closeMobileMenu()">Our Team</a>
+      <a href="javascript:void(0)" onclick="showPage('company');closeMobileMenu()">Careers</a>
+      <a href="javascript:void(0)" onclick="showPage('company');closeMobileMenu()">Contact Us</a>
     </div>
   </div>
-  <a class="mobile-plain-link" href="#" onclick="showPage('accounts');closeMobileMenu()">Accounts <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
-  <a class="mobile-plain-link" href="#" onclick="showPage('comparison');closeMobileMenu()">Comparison <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+  <a class="mobile-plain-link" href="javascript:void(0)" onclick="showPage('accounts');closeMobileMenu()">Accounts <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+  <a class="mobile-plain-link" href="javascript:void(0)" onclick="showPage('comparison');closeMobileMenu()">Comparison <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
   <div class="mobile-menu-footer">
-    <a href="#" class="btn btn-ghost">Login</a>
-    <a href="#" class="btn btn-primary">Open Account</a>
+    <a href="javascript:void(0)" class="btn btn-ghost">Login</a>
+    <a href="javascript:void(0)" class="btn btn-primary">Open Account</a>
   </div>
 </div>
 
 <!-- ================================================================
-     PAGE: HOME  (original design — untouched)
+     PAGE: HOME
 ================================================================ -->
 <div class="page active" id="page-home">
 
@@ -689,8 +694,8 @@
       <h1 class="reveal">Puxde Your Edge, Optimized</h1>
       <p class="hero-subtitle reveal" style="transition-delay:100ms">30 ms fast execution. Raw-spread efficiency. Low-latency global access for professional traders.*</p>
       <div class="hero-buttons reveal" style="transition-delay:200ms">
-        <a href="#" class="btn btn-primary">Open Account</a>
-        <a href="#" class="btn btn-secondary">Sign In</a>
+        <a href="javascript:void(0)" class="btn btn-primary">Open Account</a>
+        <a href="javascript:void(0)" class="btn btn-secondary">Sign In</a>
       </div>
     </div>
     <div class="hero-image reveal-right">
@@ -718,11 +723,11 @@
     <p class="trading-subtitle reveal" style="transition-delay:80ms">Capitalize on every opportunity with the world's most popular assets.</p>
     <div class="trading-table reveal" style="transition-delay:160ms">
       <div class="table-header"><span>Instruments</span><span>Leverage</span><span>Avg. spread (pips)</span><span>Swap-free</span><span></span></div>
-      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/2360559697.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="XAUUSD"><span>XAUUSD</span></div><span>Customizable</span><span>0.9</span><span>Available</span><a href="#" class="table-link" onclick="showPage('trade')">Metals <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
-      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/125848840.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="USOIL"><span>USOIL</span></div><span>Customizable</span><span>1.2</span><span>Available</span><a href="#" class="table-link" onclick="showPage('trade')">Energies <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
-      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/973283061.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="EURUSD"><span>EURUSD</span></div><span>Customizable</span><span>0.6</span><span>Available</span><a href="#" class="table-link" onclick="showPage('trade')">Currencies <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
-      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/2281553275.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="US30"><span>US30</span></div><span>Customizable</span><span>1.6</span><span>Available</span><a href="#" class="table-link" onclick="showPage('trade')">Indices <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
-      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/3498416174.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="AAPL"><span>AAPL</span></div><span>Customizable</span><span>0.6</span><span>Available</span><a href="#" class="table-link" onclick="showPage('trade')">Stocks <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
+      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/2360559697.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="XAUUSD"><span>XAUUSD</span></div><span>Customizable</span><span>0.9</span><span>Available</span><a href="javascript:void(0)" class="table-link" onclick="showPage('trade')">Metals <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
+      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/125848840.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="USOIL"><span>USOIL</span></div><span>Customizable</span><span>1.2</span><span>Available</span><a href="javascript:void(0)" class="table-link" onclick="showPage('trade')">Energies <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
+      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/973283061.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="EURUSD"><span>EURUSD</span></div><span>Customizable</span><span>0.6</span><span>Available</span><a href="javascript:void(0)" class="table-link" onclick="showPage('trade')">Currencies <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
+      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/2281553275.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="US30"><span>US30</span></div><span>Customizable</span><span>1.6</span><span>Available</span><a href="javascript:void(0)" class="table-link" onclick="showPage('trade')">Indices <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
+      <div class="table-row"><div class="instrument"><img data-src="https://ext.same-assets.com/3096741692/3498416174.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="AAPL"><span>AAPL</span></div><span>Customizable</span><span>0.6</span><span>Available</span><a href="javascript:void(0)" class="table-link" onclick="showPage('trade')">Stocks <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2"/></svg></a></div>
     </div>
     <p class="table-note reveal" style="transition-delay:240ms">Spreads may vary or widen due to market volatility, news, economic events, market hours, and instrument type.</p>
   </section>
@@ -811,7 +816,7 @@
       <div class="qr-section">
         <img data-src="https://ext.same-assets.com/3096741692/1522203159.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="QR Code" class="qr-code">
         <p>Scan to Download Our App.</p>
-        <a href="#" class="btn btn-primary">Download</a>
+        <a href="javascript:void(0)" class="btn btn-primary">Download</a>
       </div>
     </div>
     <div class="platforms-image reveal-right">
@@ -838,7 +843,7 @@
         <div class="step reveal-left" style="transition-delay:0ms"><div class="step-number">1</div><div class="step-content"><h4>Sign Up Instantly</h4><p>Create your account using your email, or connect with your existing social accounts.</p></div></div>
         <div class="step reveal-left" style="transition-delay:100ms"><div class="step-number">2</div><div class="step-content"><h4>Fund Your Account</h4><p>Deposit funds using multiple payment methods including credit card, bank transfer, or e-wallets.</p></div></div>
         <div class="step reveal-left" style="transition-delay:200ms"><div class="step-number">3</div><div class="step-content"><h4>Start Trading</h4><p>Access all markets and begin trading with our intuitive platforms on any devices.</p></div></div>
-        <a href="#" class="btn btn-primary reveal" style="transition-delay:300ms;display:inline-flex;width:fit-content">Open Account</a>
+        <a href="javascript:void(0)" class="btn btn-primary reveal" style="transition-delay:300ms;display:inline-flex;width:fit-content">Open Account</a>
       </div>
       <div class="join-image reveal-right">
         <img data-src="https://ext.same-assets.com/3096741692/2406284673.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Mobile trading">
@@ -847,7 +852,7 @@
     <p class="disclaimer">*For full transparency, we recommend reviewing our trading conditions carefully to understand all applicable fees and charges.</p>
   </section>
 
-  <!-- Footer (original full legal footer) -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="footer-top">
       <div class="footer-brand">
@@ -855,19 +860,19 @@
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M6 4L12 20L14 14L20 12L6 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
         <div class="social-links">
-          <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1"/></svg></a>
-          <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-          <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#040404"/></svg></a>
+          <a href="javascript:void(0)"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="javascript:void(0)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1"/></svg></a>
+          <a href="javascript:void(0)"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="javascript:void(0)"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="javascript:void(0)"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#040404"/></svg></a>
         </div>
         <img data-src="https://ext.same-assets.com/3096741692/4140392983.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="PCI Security Standards Council" class="pci-badge">
       </div>
       <div class="footer-links">
-        <div class="footer-column"><h4>Markets</h4><ul><li><a href="#" onclick="showPage('trade')">Currency CFDs</a></li><li><a href="#" onclick="showPage('trade')">Commodity CFDs</a></li><li><a href="#" onclick="showPage('trade')">Stock CFDs</a></li><li><a href="#" onclick="showPage('trade')">Index CFDs</a></li><li><a href="#" onclick="showPage('trade')">Crypto CFDs</a></li><li><a href="#" onclick="showPage('trade')">Thematic Index CFDs</a></li><li><a href="#" onclick="showPage('trade')">Live Quotes</a></li></ul></div>
-        <div class="footer-column"><h4>Trading Conditions</h4><ul><li><a href="#" onclick="showPage('accounts')">Accounts</a></li><li><a href="#">Client Security</a></li><li><a href="#">Payment Options</a></li><li><a href="#">Trading Fees</a></li><li><a href="#" onclick="showPage('comparison')">Comparison</a></li></ul></div>
-        <div class="footer-column"><h4>Platforms</h4><ul><li><a href="#" onclick="showPage('platforms')">Puxde Trade App</a></li><li><a href="#" onclick="showPage('platforms')">Puxde WebTerminal</a></li><li><a href="#" onclick="showPage('platforms')">MetaTrader 5</a></li></ul></div>
-        <div class="footer-column"><h4>Company</h4><ul><li><a href="#" onclick="showPage('company')">About</a></li><li><a href="#">Puxde Reviews</a></li><li><a href="#">Blog</a></li><li><a href="#">Partner</a></li><li><a href="#">Contact</a></li></ul></div>
+        <div class="footer-column"><h4>Markets</h4><ul><li><a href="javascript:void(0)" onclick="showPage('trade')">Currency CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Commodity CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Stock CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Index CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Crypto CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Thematic Index CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Live Quotes</a></li></ul></div>
+        <div class="footer-column"><h4>Trading Conditions</h4><ul><li><a href="javascript:void(0)" onclick="showPage('accounts')">Accounts</a></li><li><a href="javascript:void(0)">Client Security</a></li><li><a href="javascript:void(0)">Payment Options</a></li><li><a href="javascript:void(0)">Trading Fees</a></li><li><a href="javascript:void(0)" onclick="showPage('comparison')">Comparison</a></li></ul></div>
+        <div class="footer-column"><h4>Platforms</h4><ul><li><a href="javascript:void(0)" onclick="showPage('platforms')">Puxde Trade App</a></li><li><a href="javascript:void(0)" onclick="showPage('platforms')">Puxde WebTerminal</a></li><li><a href="javascript:void(0)" onclick="showPage('platforms')">MetaTrader 5</a></li></ul></div>
+        <div class="footer-column"><h4>Company</h4><ul><li><a href="javascript:void(0)" onclick="showPage('company')">About</a></li><li><a href="javascript:void(0)">Puxde Reviews</a></li><li><a href="javascript:void(0)">Blog</a></li><li><a href="javascript:void(0)">Partner</a></li><li><a href="javascript:void(0)">Contact</a></li></ul></div>
       </div>
     </div>
     <div class="footer-legal">
@@ -885,7 +890,7 @@
 </div><!-- end page-home -->
 
 <!-- ================================================================
-     SHARED INNER-PAGE FOOTER SNIPPET (reused via JS injection)
+     SHARED INNER-PAGE FOOTER SNIPPET
 ================================================================ -->
 <template id="inner-footer-tpl">
   <footer class="ifooter">
@@ -893,13 +898,13 @@
       <div class="ifooter-brand">
         <button class="logo-mark" onclick="showPage('home')"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M6 4L12 20L14 14L20 12L6 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>PUXDE</span></button>
         <p>Institutional-grade trading for the modern professional. Fast. Transparent. Global.</p>
-        <div class="social-row"><a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1"/></svg></a><a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a></div>
+        <div class="social-row"><a href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1"/></svg></a><a href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="javascript:void(0)"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a></div>
       </div>
       <div class="ifooter-cols">
-        <div><h5>Markets</h5><ul><li><a href="#" onclick="showPage('trade')">Currency CFDs</a></li><li><a href="#" onclick="showPage('trade')">Commodity CFDs</a></li><li><a href="#" onclick="showPage('trade')">Stock CFDs</a></li><li><a href="#" onclick="showPage('trade')">Index CFDs</a></li><li><a href="#" onclick="showPage('trade')">Crypto CFDs</a></li></ul></div>
-        <div><h5>Trading</h5><ul><li><a href="#" onclick="showPage('accounts')">Account Types</a></li><li><a href="#" onclick="showPage('platforms')">Platforms</a></li><li><a href="#" onclick="showPage('comparison')">Comparison</a></li><li><a href="#">Payment Options</a></li><li><a href="#">Trading Fees</a></li></ul></div>
-        <div><h5>Learn</h5><ul><li><a href="#" onclick="showPage('education')">Beginner's Guide</a></li><li><a href="#" onclick="showPage('education')">Video Tutorials</a></li><li><a href="#" onclick="showPage('education')">Market Analysis</a></li><li><a href="#" onclick="showPage('education')">Glossary</a></li></ul></div>
-        <div><h5>Company</h5><ul><li><a href="#" onclick="showPage('company')">About Us</a></li><li><a href="#" onclick="showPage('company')">Regulation</a></li><li><a href="#" onclick="showPage('company')">Our Team</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div>
+        <div><h5>Markets</h5><ul><li><a href="javascript:void(0)" onclick="showPage('trade')">Currency CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Commodity CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Stock CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Index CFDs</a></li><li><a href="javascript:void(0)" onclick="showPage('trade')">Crypto CFDs</a></li></ul></div>
+        <div><h5>Trading</h5><ul><li><a href="javascript:void(0)" onclick="showPage('accounts')">Account Types</a></li><li><a href="javascript:void(0)" onclick="showPage('platforms')">Platforms</a></li><li><a href="javascript:void(0)" onclick="showPage('comparison')">Comparison</a></li><li><a href="javascript:void(0)">Payment Options</a></li><li><a href="javascript:void(0)">Trading Fees</a></li></ul></div>
+        <div><h5>Learn</h5><ul><li><a href="javascript:void(0)" onclick="showPage('education')">Beginner's Guide</a></li><li><a href="javascript:void(0)" onclick="showPage('education')">Video Tutorials</a></li><li><a href="javascript:void(0)" onclick="showPage('education')">Market Analysis</a></li><li><a href="javascript:void(0)" onclick="showPage('education')">Glossary</a></li></ul></div>
+        <div><h5>Company</h5><ul><li><a href="javascript:void(0)" onclick="showPage('company')">About Us</a></li><li><a href="javascript:void(0)" onclick="showPage('company')">Regulation</a></li><li><a href="javascript:void(0)" onclick="showPage('company')">Our Team</a></li><li><a href="javascript:void(0)">Careers</a></li><li><a href="javascript:void(0)">Contact</a></li></ul></div>
       </div>
     </div>
     <div class="ifooter-bottom">
@@ -918,7 +923,7 @@
       <div class="section-tag reveal" style="margin:0 auto 18px">500+ Instruments</div>
       <h1 class="reveal d2">Trade the World's <em style="color:var(--accent)">Best Markets</em></h1>
       <p class="reveal d3">Access 500+ financial instruments across forex, commodities, stocks, indices, and crypto — all with institutional-grade execution.</p>
-      <div class="cta-btns reveal d4"><a href="#" class="btn btn-primary">Start Trading</a><a href="#" class="btn btn-ghost">View Spreads</a></div>
+      <div class="cta-btns reveal d4"><a href="javascript:void(0)" class="btn btn-primary">Start Trading</a><a href="javascript:void(0)" class="btn btn-ghost">View Spreads</a></div>
     </div>
   </section>
   <section class="section"><div class="container">
@@ -961,7 +966,7 @@
       </div>
     </div>
   </div></section>
-  <section class="section bg-card border-t"><div class="container"><div class="cta-banner reveal"><h2>Start Trading in Minutes</h2><p>Open a live account today and access all 500+ markets with competitive spreads.</p><div class="cta-btns"><a href="#" class="btn btn-primary">Open Account</a><a href="#" class="btn btn-ghost" onclick="showPage('accounts')">View Account Types</a></div></div></div></section>
+  <section class="section bg-card border-t"><div class="container"><div class="cta-banner reveal"><h2>Start Trading in Minutes</h2><p>Open a live account today and access all 500+ markets with competitive spreads.</p><div class="cta-btns"><a href="javascript:void(0)" class="btn btn-primary">Open Account</a><a href="javascript:void(0)" class="btn btn-ghost" onclick="showPage('accounts')">View Account Types</a></div></div></div></section>
   <div class="inner-footer-slot"></div>
 </div>
 
@@ -978,9 +983,9 @@
   </section>
   <section class="section"><div class="container">
     <div class="card-grid g3">
-      <div class="platform-card reveal d1"><div class="platform-card-top"><div class="section-tag" style="margin-bottom:14px">Mobile</div><h3>Puxde Trade App</h3><p>Full-featured mobile trading with real-time charts, one-tap execution, advanced orders, and instant notifications.</p><a href="#" class="btn btn-primary" style="display:inline-flex">Download Free</a></div><div class="platform-card-img"><div class="platform-screen"><div class="ps-bar accent"></div><div class="ps-bar w80"></div><div class="ps-chart"><div class="ps-col" style="height:30%"></div><div class="ps-col" style="height:55%"></div><div class="ps-col" style="height:40%"></div><div class="ps-col" style="height:70%;background:var(--accent)"></div><div class="ps-col" style="height:50%"></div><div class="ps-col" style="height:80%;background:var(--accent)"></div><div class="ps-col" style="height:65%"></div><div class="ps-col" style="height:90%;background:var(--accent)"></div></div></div></div></div>
-      <div class="platform-card reveal d2"><div class="platform-card-top"><div class="section-tag" style="margin-bottom:14px">Web</div><h3>Puxde WebTerminal</h3><p>Trade directly from your browser with no download required. Access all markets, charts, and tools instantly.</p><a href="#" class="btn btn-primary" style="display:inline-flex">Launch Terminal</a></div><div class="platform-card-img"><div class="platform-screen"><div class="ps-bar w60"></div><div class="ps-bar accent" style="width:70%"></div><div class="ps-chart"><div class="ps-col" style="height:60%"></div><div class="ps-col" style="height:40%"></div><div class="ps-col" style="height:75%;background:var(--accent)"></div><div class="ps-col" style="height:55%"></div><div class="ps-col" style="height:85%;background:var(--accent)"></div><div class="ps-col" style="height:45%"></div><div class="ps-col" style="height:70%"></div><div class="ps-col" style="height:95%;background:var(--accent)"></div></div></div></div></div>
-      <div class="platform-card reveal d3"><div class="platform-card-top"><div class="section-tag" style="margin-bottom:14px">Desktop</div><h3>MetaTrader 5</h3><p>The industry-standard platform. Expert Advisors, algorithmic trading, 80+ indicators, and multi-asset coverage.</p><a href="#" class="btn btn-primary" style="display:inline-flex">Download MT5</a></div><div class="platform-card-img"><div class="platform-screen"><div class="ps-bar w80"></div><div class="ps-bar w60"></div><div class="ps-chart"><div class="ps-col" style="height:45%"></div><div class="ps-col" style="height:70%;background:var(--accent)"></div><div class="ps-col" style="height:50%"></div><div class="ps-col" style="height:85%;background:var(--accent)"></div><div class="ps-col" style="height:60%"></div><div class="ps-col" style="height:35%"></div><div class="ps-col" style="height:75%;background:var(--accent)"></div><div class="ps-col" style="height:90%"></div></div></div></div></div>
+      <div class="platform-card reveal d1"><div class="platform-card-top"><div class="section-tag" style="margin-bottom:14px">Mobile</div><h3>Puxde Trade App</h3><p>Full-featured mobile trading with real-time charts, one-tap execution, advanced orders, and instant notifications.</p><a href="javascript:void(0)" class="btn btn-primary" style="display:inline-flex">Download Free</a></div><div class="platform-card-img"><div class="platform-screen"><div class="ps-bar accent"></div><div class="ps-bar w80"></div><div class="ps-chart"><div class="ps-col" style="height:30%"></div><div class="ps-col" style="height:55%"></div><div class="ps-col" style="height:40%"></div><div class="ps-col" style="height:70%;background:var(--accent)"></div><div class="ps-col" style="height:50%"></div><div class="ps-col" style="height:80%;background:var(--accent)"></div><div class="ps-col" style="height:65%"></div><div class="ps-col" style="height:90%;background:var(--accent)"></div></div></div></div></div>
+      <div class="platform-card reveal d2"><div class="platform-card-top"><div class="section-tag" style="margin-bottom:14px">Web</div><h3>Puxde WebTerminal</h3><p>Trade directly from your browser with no download required. Access all markets, charts, and tools instantly.</p><a href="javascript:void(0)" class="btn btn-primary" style="display:inline-flex">Launch Terminal</a></div><div class="platform-card-img"><div class="platform-screen"><div class="ps-bar w60"></div><div class="ps-bar accent" style="width:70%"></div><div class="ps-chart"><div class="ps-col" style="height:60%"></div><div class="ps-col" style="height:40%"></div><div class="ps-col" style="height:75%;background:var(--accent)"></div><div class="ps-col" style="height:55%"></div><div class="ps-col" style="height:85%;background:var(--accent)"></div><div class="ps-col" style="height:45%"></div><div class="ps-col" style="height:70%"></div><div class="ps-col" style="height:95%;background:var(--accent)"></div></div></div></div></div>
+      <div class="platform-card reveal d3"><div class="platform-card-top"><div class="section-tag" style="margin-bottom:14px">Desktop</div><h3>MetaTrader 5</h3><p>The industry-standard platform. Expert Advisors, algorithmic trading, 80+ indicators, and multi-asset coverage.</p><a href="javascript:void(0)" class="btn btn-primary" style="display:inline-flex">Download MT5</a></div><div class="platform-card-img"><div class="platform-screen"><div class="ps-bar w80"></div><div class="ps-bar w60"></div><div class="ps-chart"><div class="ps-col" style="height:45%"></div><div class="ps-col" style="height:70%;background:var(--accent)"></div><div class="ps-col" style="height:50%"></div><div class="ps-col" style="height:85%;background:var(--accent)"></div><div class="ps-col" style="height:60%"></div><div class="ps-col" style="height:35%"></div><div class="ps-col" style="height:75%;background:var(--accent)"></div><div class="ps-col" style="height:90%"></div></div></div></div></div>
     </div>
   </div></section>
   <section class="section bg-card border-t"><div class="container">
@@ -995,7 +1000,7 @@
       <div class="t-row" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:16px 24px;gap:16px"><span>No download required</span><span style="color:#ff5555">✗</span><span style="color:var(--accent)">✓</span><span style="color:#ff5555">✗</span></div>
     </div>
   </div></section>
-  <section class="section"><div class="container"><div class="cta-banner reveal"><h2>One Account. All Platforms.</h2><p>Sign up once and trade on any device with your Puxde credentials.</p><div class="cta-btns"><a href="#" class="btn btn-primary">Create Account</a></div></div></div></section>
+  <section class="section"><div class="container"><div class="cta-banner reveal"><h2>One Account. All Platforms.</h2><p>Sign up once and trade on any device with your Puxde credentials.</p><div class="cta-btns"><a href="javascript:void(0)" class="btn btn-primary">Create Account</a></div></div></div></section>
   <div class="inner-footer-slot"></div>
 </div>
 
@@ -1029,18 +1034,18 @@
           <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg><div><h4>Wednesday: Strategy Deep Dive</h4><p>Detailed breakdown of one trading strategy with live examples</p></div></div>
           <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg><div><h4>Friday: Live Trade Review</h4><p>Review the week's trades, what worked, and what to improve</p></div></div>
         </div>
-        <a href="#" class="btn btn-primary mt8" style="display:inline-flex">Register for Next Webinar</a>
+        <a href="javascript:void(0)" class="btn btn-primary mt8" style="display:inline-flex">Register for Next Webinar</a>
       </div>
       <div class="reveal-right"><div class="card" style="background:var(--bg)"><h3 style="margin-bottom:20px">Upcoming Sessions</h3>
         <div style="display:flex;flex-direction:column;gap:14px">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:0.82rem;color:var(--accent);margin-bottom:4px">MON — JUN 10 @ 9:00 AM GMT</div><div style="font-size:0.9rem;font-weight:600">Weekly Market Outlook</div></div><a href="#" class="btn btn-ghost" style="padding:8px 16px;font-size:0.78rem">Join</a></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:0.82rem;color:var(--accent);margin-bottom:4px">WED — JUN 12 @ 2:00 PM GMT</div><div style="font-size:0.9rem;font-weight:600">Fibonacci Retracement Mastery</div></div><a href="#" class="btn btn-ghost" style="padding:8px 16px;font-size:0.78rem">Join</a></div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0"><div><div style="font-size:0.82rem;color:var(--accent);margin-bottom:4px">FRI — JUN 14 @ 4:00 PM GMT</div><div style="font-size:0.9rem;font-weight:600">Live Trade Review Session</div></div><a href="#" class="btn btn-ghost" style="padding:8px 16px;font-size:0.78rem">Join</a></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:0.82rem;color:var(--accent);margin-bottom:4px">MON — JUN 10 @ 9:00 AM GMT</div><div style="font-size:0.9rem;font-weight:600">Weekly Market Outlook</div></div><a href="javascript:void(0)" class="btn btn-ghost" style="padding:8px 16px;font-size:0.78rem">Join</a></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:0.82rem;color:var(--accent);margin-bottom:4px">WED — JUN 12 @ 2:00 PM GMT</div><div style="font-size:0.9rem;font-weight:600">Fibonacci Retracement Mastery</div></div><a href="javascript:void(0)" class="btn btn-ghost" style="padding:8px 16px;font-size:0.78rem">Join</a></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0"><div><div style="font-size:0.82rem;color:var(--accent);margin-bottom:4px">FRI — JUN 14 @ 4:00 PM GMT</div><div style="font-size:0.9rem;font-weight:600">Live Trade Review Session</div></div><a href="javascript:void(0)" class="btn btn-ghost" style="padding:8px 16px;font-size:0.78rem">Join</a></div>
         </div>
       </div></div>
     </div>
   </div></section>
-  <section class="section"><div class="container"><div class="cta-banner reveal"><h2>Learn. Practice. Profit.</h2><p>Open a demo account and put your new knowledge to the test risk-free.</p><div class="cta-btns"><a href="#" class="btn btn-primary">Open Demo Account</a><a href="#" class="btn btn-ghost">Browse All Courses</a></div></div></div></section>
+  <section class="section"><div class="container"><div class="cta-banner reveal"><h2>Learn. Practice. Profit.</h2><p>Open a demo account and put your new knowledge to the test risk-free.</p><div class="cta-btns"><a href="javascript:void(0)" class="btn btn-primary">Open Demo Account</a><a href="javascript:void(0)" class="btn btn-ghost">Browse All Courses</a></div></div></div></section>
   <div class="inner-footer-slot"></div>
 </div>
 
@@ -1093,7 +1098,7 @@
       <div class="reg-card reveal d3"><div class="reg-flag">🇿🇦</div><h4>FSCA South Africa</h4><p>Authorized by the Financial Sector Conduct Authority, South Africa. FSP No. 53103.</p></div>
     </div>
   </div></section>
-  <section class="section bg-card border-t"><div class="container"><div class="cta-banner reveal"><h2>Be Part of the Puxde Story</h2><p>Join 650,000+ traders who have made Puxde their trading home.</p><div class="cta-btns"><a href="#" class="btn btn-primary">Open Account</a><a href="#" class="btn btn-ghost">Contact Us</a></div></div></div></section>
+  <section class="section bg-card border-t"><div class="container"><div class="cta-banner reveal"><h2>Be Part of the Puxde Story</h2><p>Join 650,000+ traders who have made Puxde their trading home.</p><div class="cta-btns"><a href="javascript:void(0)" class="btn btn-primary">Open Account</a><a href="javascript:void(0)" class="btn btn-ghost">Contact Us</a></div></div></div></section>
   <div class="inner-footer-slot"></div>
 </div>
 
@@ -1110,9 +1115,9 @@
   </section>
   <section class="section"><div class="container">
     <div class="acc-grid">
-      <div class="acc-card reveal d1"><div class="acc-name">Standard</div><div class="acc-desc">Perfect for beginners and casual traders</div><div class="acc-spread">1.2</div><div class="acc-spread-l">Average spread (pips) • No commission</div><div class="acc-features"><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Min. deposit: $100</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Leverage up to 1:500</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>All platforms supported</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Swap-free option available</div><div class="acc-feat no"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff4d4d" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#ff4d4d" stroke-width="2" stroke-linecap="round"/></svg>Dedicated account manager</div><div class="acc-feat no"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff4d4d" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#ff4d4d" stroke-width="2" stroke-linecap="round"/></svg>Raw spreads</div></div><a href="#" class="btn btn-ghost" style="width:100%;justify-content:center">Open Standard</a></div>
-      <div class="acc-card featured reveal d2"><div class="acc-featured-badge">Most Popular</div><div class="acc-name" style="color:var(--accent)">Pro ECN</div><div class="acc-desc">For active traders who demand the best</div><div class="acc-spread">0.0</div><div class="acc-spread-l">Raw spread (pips) + $3.5/lot commission</div><div class="acc-features"><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Min. deposit: $200</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Leverage up to 1:500</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>All platforms supported</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Swap-free option available</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Priority 24/7 support</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>True raw interbank spreads</div></div><a href="#" class="btn btn-primary" style="width:100%;justify-content:center">Open Pro ECN</a></div>
-      <div class="acc-card reveal d3"><div class="acc-name">Institutional</div><div class="acc-desc">For hedge funds, prop desks &amp; HFT firms</div><div class="acc-spread">0.0</div><div class="acc-spread-l">Raw spread + negotiated commission rates</div><div class="acc-features"><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Min. deposit: $10,000</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Customizable leverage</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>FIX API access</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Dedicated account manager</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Co-location options</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Custom reporting &amp; analytics</div></div><a href="#" class="btn btn-ghost" style="width:100%;justify-content:center">Contact Sales</a></div>
+      <div class="acc-card reveal d1"><div class="acc-name">Standard</div><div class="acc-desc">Perfect for beginners and casual traders</div><div class="acc-spread">1.2</div><div class="acc-spread-l">Average spread (pips) • No commission</div><div class="acc-features"><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Min. deposit: $100</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Leverage up to 1:500</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>All platforms supported</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Swap-free option available</div><div class="acc-feat no"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff4d4d" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#ff4d4d" stroke-width="2" stroke-linecap="round"/></svg>Dedicated account manager</div><div class="acc-feat no"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff4d4d" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#ff4d4d" stroke-width="2" stroke-linecap="round"/></svg>Raw spreads</div></div><a href="javascript:void(0)" class="btn btn-ghost" style="width:100%;justify-content:center">Open Standard</a></div>
+      <div class="acc-card featured reveal d2"><div class="acc-featured-badge">Most Popular</div><div class="acc-name" style="color:var(--accent)">Pro ECN</div><div class="acc-desc">For active traders who demand the best</div><div class="acc-spread">0.0</div><div class="acc-spread-l">Raw spread (pips) + $3.5/lot commission</div><div class="acc-features"><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Min. deposit: $200</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Leverage up to 1:500</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>All platforms supported</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Swap-free option available</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Priority 24/7 support</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>True raw interbank spreads</div></div><a href="javascript:void(0)" class="btn btn-primary" style="width:100%;justify-content:center">Open Pro ECN</a></div>
+      <div class="acc-card reveal d3"><div class="acc-name">Institutional</div><div class="acc-desc">For hedge funds, prop desks &amp; HFT firms</div><div class="acc-spread">0.0</div><div class="acc-spread-l">Raw spread + negotiated commission rates</div><div class="acc-features"><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Min. deposit: $10,000</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Customizable leverage</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>FIX API access</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Dedicated account manager</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Co-location options</div><div class="acc-feat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2bd29b" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#2bd29b" stroke-width="2" stroke-linecap="round"/></svg>Custom reporting &amp; analytics</div></div><a href="javascript:void(0)" class="btn btn-ghost" style="width:100%;justify-content:center">Contact Sales</a></div>
     </div>
   </div></section>
   <section class="section bg-card border-t"><div class="container">
@@ -1123,7 +1128,7 @@
       <div class="card reveal-scale d3" style="text-align:center"><div style="width:56px;height:56px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:1.2rem;margin:0 auto 18px">3</div><h3>Start Trading</h3><p>Access 500+ instruments on any platform with institutional-grade execution.</p></div>
     </div>
   </div></section>
-  <section class="section"><div class="container"><div class="cta-banner reveal"><h2>Not Ready? Try a Demo First.</h2><p>Practice with $10,000 virtual funds on a real market environment — no risk, no limits.</p><div class="cta-btns"><a href="#" class="btn btn-primary">Open Demo Account</a><a href="#" class="btn btn-ghost" onclick="showPage('comparison')">Compare More</a></div></div></div></section>
+  <section class="section"><div class="container"><div class="cta-banner reveal"><h2>Not Ready? Try a Demo First.</h2><p>Practice with $10,000 virtual funds on a real market environment — no risk, no limits.</p><div class="cta-btns"><a href="javascript:void(0)" class="btn btn-primary">Open Demo Account</a><a href="javascript:void(0)" class="btn btn-ghost" onclick="showPage('comparison')">Compare More</a></div></div></div></section>
   <div class="inner-footer-slot"></div>
 </div>
 
@@ -1166,7 +1171,7 @@
       <div class="card reveal d6"><div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3>All Platforms</h3><p>Trade on MT5, our WebTerminal, or our award-winning mobile app — all on one account.</p></div>
     </div>
   </div></section>
-  <section class="section"><div class="container"><div class="cta-banner reveal"><h2>Experience the Difference Yourself</h2><p>Join 650,000 traders who switched to Puxde for better execution, tighter spreads, and real support.</p><div class="cta-btns"><a href="#" class="btn btn-primary">Open Live Account</a><a href="#" class="btn btn-ghost">Try Demo Free</a></div></div></div></section>
+  <section class="section"><div class="container"><div class="cta-banner reveal"><h2>Experience the Difference Yourself</h2><p>Join 650,000 traders who switched to Puxde for better execution, tighter spreads, and real support.</p><div class="cta-btns"><a href="javascript:void(0)" class="btn btn-primary">Open Live Account</a><a href="javascript:void(0)" class="btn btn-ghost">Try Demo Free</a></div></div></div></section>
   <div class="inner-footer-slot"></div>
 </div>
 
@@ -1220,12 +1225,14 @@
     menuOpen = !menuOpen;
     document.getElementById('mobile-menu').classList.toggle('open', menuOpen);
     document.getElementById('hamburger').classList.toggle('open', menuOpen);
+    document.getElementById('hamburger').setAttribute('aria-expanded', menuOpen);
     document.body.style.overflow = menuOpen ? 'hidden' : '';
   }
   function closeMobileMenu() {
     menuOpen = false;
     document.getElementById('mobile-menu').classList.remove('open');
     document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('hamburger').setAttribute('aria-expanded', false);
     document.body.style.overflow = '';
   }
   function toggleMobileSub(id, btn) {
@@ -1236,11 +1243,19 @@
     if (!open) { sub.classList.add('open'); btn.classList.add('open'); }
   }
 
+  // Close mobile menu on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menuOpen) closeMobileMenu();
+  });
+
   // ======================================================
   // SCROLL ANIMATIONS
-  // (home page uses is-visible/is-past, inner pages use vis/past)
   // ======================================================
+  let revealObs = null; // store observer to disconnect on page change
+
   function initReveal() {
+    if (revealObs) revealObs.disconnect(); // clean up old observer
+
     const activePage = document.querySelector('.page.active');
     if (!activePage) return;
     const isHome = activePage.id === 'page-home';
@@ -1248,7 +1263,7 @@
     const pastClass = isHome ? 'is-past' : 'past';
 
     const els = activePage.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    const obs = new IntersectionObserver((entries) => {
+    revealObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add(visClass);
@@ -1265,7 +1280,7 @@
         }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -4% 0px' });
-    els.forEach(el => obs.observe(el));
+    els.forEach(el => revealObs.observe(el));
   }
 
   // ======================================================
@@ -1273,17 +1288,28 @@
   // ======================================================
   function loadImages() {
     const imgs = document.querySelectorAll('img[data-src]');
+    // Immediately load images already in viewport
+    imgs.forEach(img => {
+      const r = img.getBoundingClientRect();
+      if (r.top < window.innerHeight) {
+        img.src = img.dataset.src;
+        img.onload = () => img.classList.add('lazy-loaded');
+        img.removeAttribute('data-src');
+      }
+    });
+    // Lazy-load the rest
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           const img = e.target;
           img.src = img.dataset.src;
           img.addEventListener('load', () => img.classList.add('lazy-loaded'));
+          img.removeAttribute('data-src');
           obs.unobserve(img);
         }
       });
     }, { rootMargin: '300px 0px' });
-    imgs.forEach(img => obs.observe(img));
+    document.querySelectorAll('img[data-src]').forEach(img => obs.observe(img));
   }
 
   // ======================================================
