@@ -73,9 +73,8 @@ body {
 
 
 .app {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
+    min-height: 100dvh; /* modern mobile-safe viewport */
+    display: flex;
 }
 
 /* Sidebar */
@@ -240,11 +239,18 @@ body {
 }
 
 /* Main Content */
-.main-content {
+/* .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+} */
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow-y: auto;
 }
 
 .header {
@@ -1309,3 +1315,15 @@ tbody tr:hover {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.7; transform: scale(1.1); }
 }
+html, body {
+    height: 100%;
+}
+
+.app {
+    min-height: 100dvh;
+}
+
+.content {
+    flex: 1;
+}
+
