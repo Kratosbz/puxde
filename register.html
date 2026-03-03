@@ -418,6 +418,10 @@ function verifyOTP(){
 
     if(entered===stored){
         Swal.fire({icon:'success',text:'Account verified!'});
+
+        setTimeout(() => {
+          location.href="./login.html"
+        }, 2000);
     }else{
         Swal.fire({icon:'error',text:'Invalid OTP'});
     }
