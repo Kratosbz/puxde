@@ -474,19 +474,23 @@
 
                 /* ── Layout: make main-content a scrollable column so
                    header + content + footer all scroll together ── */
-                .main-content {
-                    overflow-y: auto !important;
-                    overflow-x: hidden;
-                }
-                /* #content must NOT be the scroller anymore */
-                #content {
-                    overflow-y: visible !important;
-                    flex: none !important;
-                    min-height: 0;
-                }
-                .app-footer {
-                    flex-shrink: 0;
-                }
+                /* ── Layout fix: footer scrolls with page on all screen sizes ── */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    height: 100%;
+}
+#content {
+    flex: 1 1 auto !important;   /* grows to fill space — DO NOT set flex:none */
+    overflow-y: auto;
+    min-height: 0;
+}
+.app-footer {
+    flex-shrink: 0;
+    margin-top: auto;
+}
             </style>
 
             </footer><!-- end app-footer -->
