@@ -318,8 +318,39 @@ CFDs are complex instruments and come with a high risk of losing money rapidly d
     <button class="primary" onclick="verifyOTP()">Verify</button>
 </div>
 
-</div>
+<script>
+// OTP AUTO-ADVANCE
+document.querySelectorAll('.otp').forEach(function(input, index, inputs) {
+    input.addEventListener('input', function() {
+        // Only allow digits
+        this.value = this.value.replace(/[^0-9]/g, '');
+        // Move to next box if a digit was entered
+        if (this.value.length === 1 && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+        }
+    });
 
+    input.addEventListener('keydown', function(e) {
+        // Move back on backspace if current box is empty
+        if (e.key === 'Backspace' && this.value === '' && index > 0) {
+            inputs[index - 1].focus();
+        }
+    });
+
+    // Handle paste across all boxes
+    input.addEventListener('paste', function(e) {
+        e.preventDefault();
+        const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+        [...pasted].forEach(function(digit, i) {
+            if (inputs[index + i]) inputs[index + i].value = digit;
+        });
+        const nextEmpty = index + pasted.length;
+        if (inputs[nextEmpty]) inputs[nextEmpty].focus();
+    });
+});
+
+// ... rest of your existing script
+</script>
 <script>
 
 // PAGE SWITCH
